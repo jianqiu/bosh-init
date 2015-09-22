@@ -37,14 +37,14 @@ HOWTO
     bosh create release --force --with-tarball
 ```
 
-#6.Build CPI release
-1. clone softlayer eCPI source code
+#6.Clone softlayer eCPI source code
 ```bash
     git clone bosh-softlayer-cpi-release 
     git submodule update --init —-recursive
 ```
 
-2. build softlayer cpi release
+
+#7. Build softlayer cpi release
 ```bash
     cd bosh;
     bundle install;
