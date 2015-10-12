@@ -178,5 +178,5 @@ cloud_provider:
 
 #9.Run bosh-init
 ```bash
-   ./bosh deploy sl.yml
+   ./bosh-init deploy sl.yml
 ```
