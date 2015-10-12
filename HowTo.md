@@ -55,7 +55,126 @@ HOWTO
 ```
 
 
-#8.Edit yaml file 
+#8.Edit yaml file
+`Example.yml`
+```yaml
+---
+name: bosh
+
+releases:
+- name: bosh
+  url: file://./bosh-206+dev.2.tgz
+- name: bosh-softlayer-cpi
+  url: file://./bosh-softlayer-cpi-0+dev.1.tgz
+
+resource_pools:
+- name: vms
+  network: default
+  stemcell:
+    url: file://./light-bosh-stemcell-3030-softlayer-esxi-ubuntu-trusty-go_agent.tgz
+  cloud_properties:
+    Domain: softlayer.com
+    VmNamePrefix: bosh-wjq
+    StartCpus: 1
+    MaxMemory: 1024
+    Datacenter:
+       Name: lon02
+    HourlyBillingFlag: true
+disk_pools:
+- name: disks
+  disk_size: 40_000
+  cloud_properties:
+    consistent_performance_iscsi: true
+
+
+networks:
+- name: default
+  type: dynamic
+  dns: [8.8.8.8] # <--- Replace with your DNS
+
+
+jobs:
+- name: bosh
+  instances: 1
+
+  templates:
+  - {name: nats, release: bosh}
+  - {name: redis, release: bosh}
+  - {name: postgres, release: bosh}
+  - {name: blobstore, release: bosh}
+  - {name: director, release: bosh}
+  - {name: health_monitor, release: bosh}
+  - {name: cpi, release: bosh-softlayer-cpi}
+
+  resource_pool: vms
+  persistent_disk_pool: disks
+
+  networks:
+  - name: default
+
+  properties:
+    nats:
+      address: 127.0.0.1
+      user: nats
+      password: nats-password
+
+    redis:
+      listen_addresss: 127.0.0.1
+      address: 127.0.0.1
+      password: redis-password
+
+    postgres: &db
+      host: 127.0.0.1
+      user: postgres
+      password: postgres-password
+      database: bosh
+      adapter: postgres
+
+    blobstore:
+      address: 127.0.0.1   # <--- Replace with a private IP
+      port: 25250
+      provider: dav
+      director: {user: director, password: director-password}
+      agent: {user: agent, password: agent-password}
+
+    director:
+      address: 127.0.0.1
+      name: my-bosh
+      db: *db
+      cpi_job: cpi
+      max_threads: 3
+
+    hm:
+      director_account: {user: admin, password: admin}
+      resurrector_enabled: true
+
+    softlayer: &softlayer
+      username: fake_user_name	# <--- Replace with username
+      apiKey: fake_api_key 		# <--- Replace with password
+      public_vlan_id: fake_public_vlan_id
+      private_vlan_id: fake_private_vlan_id
+      data_center: lon02
+
+    cpi:
+      agent: {mbus: "nats://nats:nats-password@127.0.0.1:4222"} # <--- Replace with a private IP
+
+    ntp: &ntp []
+
+cloud_provider:
+  template: {name: cpi, release: bosh-softlayer-cpi}
+  mbus: "https://admin:admin@bosh-wjq.softlayer.com:6868" # <--- Replace with a floating IP
+
+  properties:
+    softlayer: *softlayer
+    cpi:
+      agent:
+        mbus: https://admin:admin@127.0.0.1:6868
+        ntp: *ntp
+        blobstore:
+          provider: local
+          options:
+            blobstore_path: /var/vcap/micro_bosh/data/cache
+```
 
 #9.Run bosh-init
 ```bash
