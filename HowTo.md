@@ -201,9 +201,9 @@ bosh status
 
 
 #12.Upload the fake stemcell
-1. Download to local and transfer to your bosh cli
-2. bosh upload stemcell <fake_stemcell_v2751.tar.gz>
+1. Download & transfer to your bosh cli
+2. bosh upload stemcell STEMCELL_FILE
 
 #13.Deploy the env
-1. bosh deployment <xxx.yml>
+1. bosh deployment xxx.yml
 2. bosh deploy
