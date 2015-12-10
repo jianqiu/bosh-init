@@ -200,7 +200,7 @@ bosh status
 2. bosh upload release <~/releases/cf-release_cf-xxx.tgz>
 
 
-#12.Upload the fake stemcell
+#12.Upload the light stemcell
 1. Download & transfer to your bosh cli
 2. bosh upload stemcell STEMCELL_FILE
 
