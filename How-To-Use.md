@@ -30,25 +30,25 @@ HOWTO
 ```bash
     mkdir -p /root/myDeploy/`date -d "today" +"%Y%m%d_%H"`/director
     cd /root/myDeploy/`date -d "today" +"%Y%m%d_%H"`/director
-    wget -O sl-bosh.yml  http://10.113.109.244/stable/sl-bosh.yml
+    wget http://10.113.109.244/stable/sl-bosh.yml
 ```
 
 #5. Download Bosh tarball file
 ```bash
     cd /root/myDeploy/`date -d "today" +"%Y%m%d_%H"`/director
-    wget -O sl-bosh.yml  http://10.113.109.244/stable/bosh-230+dev.2.tgz
+    wget http://10.113.109.244/stable/bosh-230+dev.2.tgz
 ```
 
 #6. Download eCPI tarball file
 ```bash
     cd /root/myDeploy/`date -d "today" +"%Y%m%d_%H"`/director
-    wget -O sl-bosh.yml  http://10.113.109.244/stable/bosh-softlayer-cpi-0+dev.1.tgz
+    wget http://10.113.109.244/stable/bosh-softlayer-cpi-0+dev.1.tgz
 ```
 
 #7. Download stemcell tarball file
 ```bash
     cd /root/myDeploy/`date -d "today" +"%Y%m%d_%H"`/director
-    wget -O sl-bosh.yml  http://10.113.109.244/stable/light-bosh-stemcell-3031-softlayer-esxi-ubuntu-trusty-go_agent.tgz
+    wget http://10.113.109.244/stable/light-bosh-stemcell-3031-softlayer-esxi-ubuntu-trusty-go_agent.tgz
 ```
 
 
@@ -224,7 +224,7 @@ cloud_provider:
 
 #9.Run bosh-init to deploy bosh director
 ```bash
-   bosh-init deploy sl.yml
+   bosh-init deploy sl-bosh.yml
 ```
 
 #10.Check bosh director status
