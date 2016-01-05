@@ -26,7 +26,7 @@ HOWTO
     wget -O /usr/local/bin/bosh-init  http://10.113.109.244/stable/bosh-init-enable-os-reload
 ```
 
-#4. Download YAML sample file
+#4. Download deployment sample file
 ```bash
     mkdir -p /root/myDeploy/`date -d "today" +"%Y%m%d_%H"`/director
     cd /root/myDeploy/`date -d "today" +"%Y%m%d_%H"`/director
@@ -52,7 +52,7 @@ HOWTO
 ```
 
 
-#8.Edit yaml file
+#8.Edit deployment sample file
 `sl-bosh.yml`
 ```yaml
 ---
