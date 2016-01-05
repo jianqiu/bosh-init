@@ -1,5 +1,5 @@
 
-This README is just a fast *quick start* document about how to use **bosh-init** to deploy a new Bosh Director.
+This guide is just a fast *quick start* document about how to use **bosh-init** to deploy a new Bosh Director.
 
 HOWTO
 --------------
@@ -233,4 +233,5 @@ You can use bosh cli to target the bosh director, and run some commands to check
 
 ```bash
    cat /etc/hosts | sed -n '2p'  | awk '{print $1}' | xargs -n1 -t bosh target
+   bosh status
 ```
