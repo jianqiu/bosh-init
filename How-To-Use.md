@@ -222,34 +222,15 @@ cloud_provider:
             blobstore_path: /var/vcap/micro_bosh/data/cache
 
 
-#6.Run bosh-init to deploy bosh director
+#9.Run bosh-init to deploy bosh director
 ```bash
    bosh-init deploy sl.yml
 ```
 
-#10.Make bosh cli ready
-In step#9, Bosh Director should be created. So, you can use bosh cli to interactive with Bosh Director.
-*Softlayer is not supported officailly in current phrase, so you MUST not install bosh cli from the CF community.*
-*Instead, you MUST get the bosh cli vm from the Softlayer image template, or use the pre-build tarball.*
+#10.Check bosh director ready
+If success, the bosh Director should be created. 
+You can use bosh cli to target the bosh director, and run some commands to check the status of the director.
 
 ```bash
-#install Softlayer Python client 
-pip install slcli
-#CID can be get from the json file created by Bosh-init
-slcli vs list | grep <CID> //Get Bosh director's IP created by Bosh-init
-slcli vs details <CID>      
-bosh target <BOSH_DIRECTOR_IP>
-bosh status
+   cat /etc/hosts | sed -n '2p'  | awk '{print $1}' | xargs -n1 -t bosh target
 ```
-#11.Upload releases to bosh director
-1. Copy the releases from Repo to your bosh cli (somewhere like ~/releases)
-2. bosh upload release <~/releases/cf-release_cf-xxx.tgz>
-
-
-#12.Upload the light stemcell
-1. Download & transfer to your bosh cli
-2. bosh upload stemcell STEMCELL_FILE
-
-#13.Deploy the env
-1. bosh deployment xxx.yml
-2. bosh deploy
