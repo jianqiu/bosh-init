@@ -192,16 +192,17 @@ jobs:
         address: 0.0.0.0
     softlayer: &softlayer
       username: fake_username                                                                      # <--- Replace with username
-      apiKey: fake_password                                                                       # <--- Replace with password
+      apiKey: fake_password                                                                        # <--- Replace with password
 
     cpi:
       agent: 
-        mbus: nats://nats:nats-password@127.0.0.1:4222                                            
+        mbus: nats://nats:nats@127.0.0.1:4222  ＃<-- double check user/password for nats                                          
         ntp: []
+        vcappassword: $6$EWSrWZcD$TW7FcMConryu3h436UbSKNw3SWpSUpmx14lcO7r2aKt/UhITdVdrfnXbQOgnuT7.0OLpJGqMHUdjJlFUfBaUH0
         blobstore: 
           provider: dav
           options:
-            endpoint: http://10.254.50.4:25250 
+            endpoint: http://127.0.0.1:25250 
             user: agent
             password: agent
     ntp: &ntp []
@@ -216,6 +217,7 @@ cloud_provider:
       agent:
         mbus: https://admin:admin@127.0.0.1:6868
         ntp: *ntp
+        vcappassword: $6$EWSrWZcD$TW7FcMConryu3h436UbSKNw3SWpSUpmx14lcO7r2aKt/UhITdVdrfnXbQOgnuT7.0OLpJGqMHUdjJlFUfBaUH0
         blobstore:
           provider: local
           options:
