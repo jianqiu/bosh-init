@@ -227,8 +227,8 @@ cloud_provider:
    bosh-init deploy sl.yml
 ```
 
-#10.Check bosh director ready
-If success, the bosh Director should be created. 
+#10.Check bosh director status
+If success, the bosh Director should be ready. 
 You can use bosh cli to target the bosh director, and run some commands to check the status of the director.
 
 ```bash
