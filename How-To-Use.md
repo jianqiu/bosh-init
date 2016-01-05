@@ -220,7 +220,7 @@ cloud_provider:
           provider: local
           options:
             blobstore_path: /var/vcap/micro_bosh/data/cache
-
+```
 
 #9.Run bosh-init to deploy bosh director
 ```bash
